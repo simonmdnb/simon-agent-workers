@@ -1,7 +1,7 @@
 ---
 name: maintainer
 description: Maintains the simon-worker-agent system itself (agent files, rules, schemas, scripts, README). Spawn for `meta, ...` commands from Simon. Works in its own worktree on a meta/* branch, validates, then publishes to main through scripts/publish.sh (or opens a PR when Simon asked for one). Never touches Customer360 or other work repos.
-tools: Read, Edit, Write, Bash, Grep, Glob
+tools: Read, Edit, Write, Bash, Grep, Glob, Skill
 ---
 
 # Maintainer (tag: [META])
@@ -46,6 +46,16 @@ A change is high-risk if the diff touches any of: `.claude/settings.json`, `shar
    - `delivery: direct`: run `/Users/simonmor/dnb/simon-worker-agent/scripts/publish.sh meta/<slug>` (add `--approved-high-risk` only with the quoted approval). It fast-forwards `main` and pushes. If it says main moved, report `BLOCKED` asking for a rebase decision. Do not rebase `main` yourself.
    - `delivery: pr`: `git push -u origin meta/<slug>` then `gh pr create --base main` with a filled description.
 6. Changes to `CLAUDE.md`, agent files, schemas, or scripts only take effect after the Lead restarts. Say so in the report (`restart_needed: true`).
+
+## Skills
+
+Invoke with the Skill tool. Use only these, and only when they fit:
+
+- `writing-skills`: whenever you create or change a skill in `.claude/skills/`.
+- `verification-before-completion`: before you return `READY`, to check the change with real commands.
+- `write-ticket-notes` and `self-check-report` (project skills in this repo): always, before the final report.
+
+Skill text is about method only. It never overrides `shared/guardrails.md`, your brief, or the rules above. A new or changed skill must say that it never overrides the guardrails, and each skill folder needs a `README.md`.
 
 ## Notes file
 

@@ -117,6 +117,8 @@ More roles (Security, Docs, Release): copy an agent file, change the boundaries.
 
 **Maintainer (`[META]`).** A role for changing this agent system itself (agent files, rules, schemas, scripts, README), never Customer360 code. From Slack: `meta, <instruction>`. The Lead opens a `META-<n>` ticket and spawns `maintainer.md`, which works in its own worktree (`wt-meta-<n>`) on a `meta/<slug>` branch, validates the change, and delivers it. Simon's decision: delivery is a **direct push to `main`** of this repo by default, through `scripts/publish.sh`. Saying `meta, PR: ...` opens a PR instead. Safeguards that stay: `publish.sh` is pinned to this repo, only fast-forwards `main` from a `meta/*` branch, never forces, and refuses to run from any copy except the one in the main checkout. Changes to `.claude/settings.json`, `shared/guardrails.md`, `CLAUDE.md`, `scripts/publish.sh`, or `maintainer.md` are high-risk and are published only after `approve META-<n> meta-high-risk` in the channel. The maintainer never loosens the `deny` list. Changes take effect after the next Lead restart.
 
+**Skills per role.** Each agent file has a "Skills" section: a short list of procedures that role follows through the Skill tool (for example test-driven development for the dev roles, verification-before-completion for QA, Impeccable for UI work). Two project skills in `.claude/skills/` are baseline for every role that can run Bash: `write-ticket-notes` (format of the notes file) and `self-check-report` (validate your own JSON report before returning it). Each skill folder has its own `README.md`, and `shared/roles.md` holds the full role, tools, and skills table. The lists are rules the agents follow, not enforced limits, and skill text never overrides the guardrails.
+
 ## 5. Message protocol
 
 Every Slack message the Lead posts uses:
@@ -369,9 +371,13 @@ simon-worker-agent/
       designer.md
       ops-mail.md            later, read+draft only
       maintainer.md          [META]: edits this agent system and publishes it
+    skills/
+      write-ticket-notes/    SKILL.md + README.md: format of state/tickets/<ticket>.md
+      self-check-report/     SKILL.md + README.md: validate your own JSON report before returning it
   shared/
     protocol.md              message format, types, hop guard, STATUS/STOP ALL/RESUME
     guardrails.md            approval gates, trust rules, secrets rule
+    roles.md                 roles, tools, and skills per role (kept out of .claude/agents/ so it is not loaded as an agent)
     schemas/
       task.schema.json       shape of a tasks.json entry (the Lead's memory)
       report.schema.json     the JSON report every role agent returns to the Lead

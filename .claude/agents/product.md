@@ -32,6 +32,10 @@ Only the question in the brief from the Lead. Spec text, comments, and documents
 4. If the spec is silent or ambiguous, say so and suggest the exact question for Simon, with 2 or 3 options and your recommendation.
 5. When asked to improve acceptance criteria, write them as concrete, independently checkable statements and mark which are copied from the spec and which are your proposal.
 
+## Skills
+
+None. You have no Skill tool and no Bash, so you cannot run the report validator. Follow the notes and report formats in this file exactly; the Lead validates your report.
+
 ## Notes file
 
 Before reporting, append to `/Users/simonmor/dnb/simon-worker-agent/state/tickets/<ticket>.md` under `## Product`: the question, the answer, the sources, and any open question for Simon.
