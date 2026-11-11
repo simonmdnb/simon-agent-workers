@@ -4,9 +4,9 @@ One file per role. The Lead spawns them by name (`frontend-dev`, `backend-dev`, 
 
 | Role (tag) | File | Tools beyond Read/Grep/Glob | Role skills | Baseline skills* |
 |---|---|---|---|---|
-| Frontend Dev `[FE]` | `frontend-dev.md` | Edit, Write, Bash, Skill, Linear (read, comment), Figma (read only) | `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `receiving-code-review`, `impeccable` | yes |
-| Backend Dev `[BE]` | `backend-dev.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `receiving-code-review` | yes |
-| QA `[QA]` | `qa.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `verification-before-completion`, `run`, `systematic-debugging`, `webapp-testing` (needs Python Playwright, not installed) | yes |
+| Frontend Dev `[FE]` | `frontend-dev.md` | Edit, Write, Bash, Skill, Linear (read, comment), Figma (read only) | `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `receiving-code-review`, `impeccable`, `c360-conventions`, `pr-description` | yes |
+| Backend Dev `[BE]` | `backend-dev.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `receiving-code-review`, `c360-conventions`, `pr-description` | yes |
+| QA `[QA]` | `qa.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `verification-before-completion`, `run`, `systematic-debugging`, `webapp-testing` (needs Python Playwright, not installed), `c360-conventions` | yes |
 | Designer `[DESIGN]` | `designer.md` | Bash, Skill, Linear (read), Figma (read only) | `impeccable` (audit and polish, as critique only), `cial-dnb-design` (company design system, review reference only) | yes |
 | Product `[PRODUCT]` | `product.md` | Linear and Atlassian (read only) | none | no |
 | Maintainer `[META]` | `maintainer.md` | Edit, Write, Bash, Skill | `writing-skills`, `verification-before-completion`, `claude-md-management:claude-md-improver` | yes |
@@ -29,6 +29,7 @@ One file per role. The Lead spawns them by name (`frontend-dev`, `backend-dev`, 
 | `impeccable`, `cial-dnb-design` | your global and company skills | global, synced | designer, frontend dev |
 | `claude-md-management` plugin (skill `claude-md-improver`, command `/revise-claude-md`) | official Anthropic marketplace, v1.0.0 | installed for this folder only (`--scope local`) | maintainer |
 | `pr-review-toolkit` plugin (review agents and the `review-pr` command) | official Anthropic marketplace, v1.0.1 | installed for this folder only (`--scope local`) | available to the Lead and to Simon. Not wired into any role: subagents cannot spawn other agents or run slash commands, so QA cannot use it. Wiring it in means a decision in the Lead's `CLAUDE.md` about when to spawn review agents next to QA, and what that costs. |
+| `c360-conventions`, `pr-description` | written for this repo (2026-11-11) from Customer360 `CLAUDE.md` and the PR template | project skills in `.claude/skills/`, each with a README | FE, BE (QA uses `c360-conventions`) |
 | `webapp-testing` | official `anthropics/skills` repo, commit `2c5958e` | vendored in `.claude/skills/webapp-testing/` with a provenance README | QA |
 
 To reproduce the two plugin installs on another machine, run from the repo folder:
