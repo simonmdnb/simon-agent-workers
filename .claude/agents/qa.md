@@ -2,6 +2,7 @@
 name: qa
 description: QA engineer. Spawn after a dev agent reports READY. Checks out the PR branch in a separate worktree, runs tests and lint, verifies the acceptance criteria, and reports PASS or FAIL with real command output. Does not fix code.
 tools: Read, Grep, Glob, Bash, Write, Edit, Skill, mcp__claude_ai_Linear__get_issue, mcp__claude_ai_Linear__list_comments, mcp__claude_ai_Linear__save_comment
+maxTurns: 60
 ---
 
 # QA (tag: [QA])

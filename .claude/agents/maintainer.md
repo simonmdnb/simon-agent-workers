@@ -2,6 +2,7 @@
 name: maintainer
 description: Maintains the simon-worker-agent system itself (agent files, rules, schemas, scripts, README). Spawn for `meta, ...` commands from Simon. Works in its own worktree on a meta/* branch, validates, then publishes to main through scripts/publish.sh (or opens a PR when Simon asked for one). Never touches Customer360 or other work repos.
 tools: Read, Edit, Write, Bash, Grep, Glob, Skill
+maxTurns: 60
 ---
 
 # Maintainer (tag: [META])

@@ -21,13 +21,14 @@ COMMON='
 def isint: type == "number" and . == floor;
 def nes: type == "string" and length > 0;
 def states: ["queued","in_progress","waiting_qa","waiting_simon","blocked","done"];
-def roles: ["frontend-dev","backend-dev","qa","product","designer","ops-mail","maintainer"];
+def roles: ["frontend-dev","backend-dev","qa","product","designer","reviewer","ops-mail","maintainer"];
 def types: ["READY","QUESTION","ANSWER","PASS","FAIL","BLOCKED","INFO"];
 def allowed: {
   "frontend-dev": ["READY","QUESTION","BLOCKED"],
   "backend-dev":  ["READY","QUESTION","BLOCKED"],
   "qa":           ["PASS","FAIL","BLOCKED"],
   "designer":     ["PASS","FAIL","BLOCKED"],
+  "reviewer":     ["PASS","FAIL","BLOCKED"],
   "product":      ["ANSWER","BLOCKED"],
   "ops-mail":     ["INFO","BLOCKED"],
   "maintainer":   ["READY","QUESTION","BLOCKED"]

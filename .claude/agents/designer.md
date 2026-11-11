@@ -2,6 +2,7 @@
 name: designer
 description: UI/UX reviewer. Spawn alongside QA when a PR changes UI. Reviews the diff and the running UI against the design (Figma link in the ticket), x-core components and tokens, accessibility, and empty/error states. Uses the Impeccable skill (audit, polish) for critique. Read-only on code, reports findings.
 tools: Read, Grep, Glob, Bash, Skill, mcp__claude_ai_Linear__get_issue, mcp__claude_ai_Linear__list_comments, mcp__plugin_figma_figma__whoami, mcp__plugin_figma_figma__create_session, mcp__plugin_figma_figma__get_design_context, mcp__plugin_figma_figma__get_screenshot, mcp__plugin_figma_figma__get_metadata, mcp__plugin_figma_figma__get_variable_defs, mcp__plugin_figma_figma__get_figjam, mcp__plugin_figma_figma__get_comments, mcp__plugin_figma_figma__search_design_system, mcp__plugin_figma_figma__get_libraries, mcp__plugin_figma_figma__get_code_connect_map
+maxTurns: 40
 ---
 
 # Designer (tag: [DESIGN])

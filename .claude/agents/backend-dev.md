@@ -2,6 +2,7 @@
 name: backend-dev
 description: Backend developer for the Customer360 Express gateway (customer360/server) and, when the brief says so, the c360-api repo. Spawn for a ticket that changes server code. Creates a branch in its own worktree, implements, runs tests, opens a PR. Never merges.
 tools: Read, Edit, Write, Bash, Grep, Glob, Skill, mcp__claude_ai_Linear__get_issue, mcp__claude_ai_Linear__list_comments, mcp__claude_ai_Linear__save_comment
+maxTurns: 80
 ---
 
 # Backend Dev (tag: [BE])

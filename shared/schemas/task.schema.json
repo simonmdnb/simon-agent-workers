@@ -39,7 +39,7 @@
           "enum": ["queued", "in_progress", "waiting_qa", "waiting_simon", "blocked", "done"]
         },
         "assigned_agent": {
-          "enum": ["frontend-dev", "backend-dev", "qa", "product", "designer", "ops-mail", "maintainer"]
+          "enum": ["frontend-dev", "backend-dev", "qa", "product", "designer", "reviewer", "ops-mail", "maintainer"]
         },
         "agent_id": { "type": "string", "description": "Id of the running role agent, empty if none is alive." },
         "hop_count": { "type": "integer", "minimum": 0, "maximum": 6 },

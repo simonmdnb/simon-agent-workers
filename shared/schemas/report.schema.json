@@ -8,7 +8,7 @@
   "properties": {
     "type": { "enum": ["READY", "QUESTION", "ANSWER", "PASS", "FAIL", "BLOCKED", "INFO"] },
     "ticket": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9]*-[0-9]+$" },
-    "role": { "enum": ["frontend-dev", "backend-dev", "qa", "product", "designer", "ops-mail", "maintainer"] },
+    "role": { "enum": ["frontend-dev", "backend-dev", "qa", "product", "designer", "reviewer", "ops-mail", "maintainer"] },
     "commit": { "type": "string", "pattern": "^[0-9a-f]{7,40}$", "description": "Maintainer: sha of the commit that was published." },
     "delivery": { "enum": ["direct", "pr"], "description": "Maintainer: direct push to main, or a PR." },
     "restart_needed": { "type": "boolean", "description": "Maintainer: the change only takes effect after the Lead restarts." },
@@ -58,7 +58,7 @@
     "question_for_simon": { "type": "string" },
     "findings": {
       "type": "array",
-      "description": "Designer: ranked findings.",
+      "description": "Designer and reviewer: ranked findings.",
       "items": {
         "type": "object",
         "required": ["rank", "issue"],
@@ -77,7 +77,7 @@
       "description": "Which types each role may return.",
       "oneOf": [
         { "properties": { "role": { "enum": ["frontend-dev", "backend-dev", "maintainer"] }, "type": { "enum": ["READY", "QUESTION", "BLOCKED"] } } },
-        { "properties": { "role": { "enum": ["qa", "designer"] }, "type": { "enum": ["PASS", "FAIL", "BLOCKED"] } } },
+        { "properties": { "role": { "enum": ["qa", "designer", "reviewer"] }, "type": { "enum": ["PASS", "FAIL", "BLOCKED"] } } },
         { "properties": { "role": { "const": "product" }, "type": { "enum": ["ANSWER", "BLOCKED"] } } },
         { "properties": { "role": { "const": "ops-mail" }, "type": { "enum": ["INFO", "BLOCKED"] } } }
       ]

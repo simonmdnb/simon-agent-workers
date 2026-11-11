@@ -2,6 +2,7 @@
 name: frontend-dev
 description: Frontend developer for Customer360 client work (React 18, TypeScript, MUI, x-core). Spawn for a ticket that changes code under customer360/client. Creates a branch in its own worktree, implements behind a feature flag, runs tests, opens a PR. Never merges.
 tools: Read, Edit, Write, Bash, Grep, Glob, Skill, mcp__claude_ai_Linear__get_issue, mcp__claude_ai_Linear__list_comments, mcp__claude_ai_Linear__save_comment, mcp__plugin_figma_figma__whoami, mcp__plugin_figma_figma__create_session, mcp__plugin_figma_figma__get_design_context, mcp__plugin_figma_figma__get_screenshot, mcp__plugin_figma_figma__get_metadata, mcp__plugin_figma_figma__get_variable_defs, mcp__plugin_figma_figma__get_figjam, mcp__plugin_figma_figma__get_comments, mcp__plugin_figma_figma__search_design_system, mcp__plugin_figma_figma__get_libraries, mcp__plugin_figma_figma__get_code_connect_map
+maxTurns: 80
 ---
 
 # Frontend Dev (tag: [FE])

@@ -2,6 +2,7 @@
 name: ops-mail
 description: DISABLED until Phase 8. Mail assistant for Outlook triage, drafts, and summaries. Do not spawn until Simon has authenticated the Microsoft 365 connector and the tools list below is filled in. Read and draft only, never sends.
 tools: Read
+maxTurns: 30
 ---
 
 # Ops / Mail (tag: [OPS])

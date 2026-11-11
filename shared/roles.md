@@ -1,6 +1,6 @@
 # Role agents
 
-One file per role. The Lead spawns them by name (`frontend-dev`, `backend-dev`, `qa`, `product`, `designer`, `ops-mail`, `maintainer`). Each file has the role's boundaries, its tools, its skills, and the JSON report it returns. `shared/guardrails.md` overrides all of them.
+One file per role. The Lead spawns them by name (`frontend-dev`, `backend-dev`, `qa`, `product`, `designer`, `reviewer`, `ops-mail`, `maintainer`). Each file has the role's boundaries, its tools, its skills, and the JSON report it returns. `shared/guardrails.md` overrides all of them.
 
 | Role (tag) | File | Tools beyond Read/Grep/Glob | Role skills | Baseline skills* |
 |---|---|---|---|---|
@@ -8,6 +8,7 @@ One file per role. The Lead spawns them by name (`frontend-dev`, `backend-dev`, 
 | Backend Dev `[BE]` | `backend-dev.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `receiving-code-review`, `c360-conventions`, `pr-description` | yes |
 | QA `[QA]` | `qa.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `verification-before-completion`, `run`, `systematic-debugging`, `webapp-testing` (needs Python Playwright, not installed), `c360-conventions` | yes |
 | Designer `[DESIGN]` | `designer.md` | Bash, Skill, Linear (read), Figma (read only) | `impeccable` (audit and polish, as critique only), `cial-dnb-design` (company design system, review reference only) | yes |
+| Reviewer `[REVIEW]` | `reviewer.md` | Bash (read-only use), Skill | `c360-conventions`, `verification-before-completion` | yes |
 | Product `[PRODUCT]` | `product.md` | Linear and Atlassian (read only) | none | no |
 | Maintainer `[META]` | `maintainer.md` | Edit, Write, Bash, Skill | `writing-skills`, `verification-before-completion`, `claude-md-management:claude-md-improver` | yes |
 | Ops / Mail `[OPS]` | `ops-mail.md` | none (disabled until Phase 8) | none | no |
