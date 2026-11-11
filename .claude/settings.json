@@ -92,7 +92,11 @@
       "mcp__plugin_figma_figma__get_comments",
       "mcp__plugin_figma_figma__search_design_system",
       "mcp__plugin_figma_figma__get_libraries",
-      "mcp__plugin_figma_figma__get_code_connect_map"
+      "mcp__plugin_figma_figma__get_code_connect_map",
+      "Bash(date)",
+      "Bash(date *)",
+      "Bash(/Users/simonmor/dnb/simon-worker-agent/scripts/prep-worktree.sh *)",
+      "Bash(/Users/simonmor/dnb/simon-worker-agent/scripts/c360.sh *)"
     ],
     "ask": [
       "Edit(//Users/simonmor/dnb/simon-worker-agent/.claude/**)",
