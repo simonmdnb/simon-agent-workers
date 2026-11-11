@@ -47,7 +47,12 @@
         "summary": { "type": "string" },
         "notes_file": { "type": "string", "minLength": 1 },
         "linear_notes_doc_id": { "type": "string", "description": "Id of the Linear document that mirrors the notes file. Empty until first saved." },
-        "last_activity": { "type": "string" }
+        "last_activity": { "type": "string" },
+        "queued_reason": { "enum": ["daily_limit", "active_cap"], "description": "Why a queued ticket is waiting." },
+        "started_at": { "type": "string", "description": "ISO time the TASK root was posted." },
+        "ready_at": { "type": "string", "description": "ISO time of the first READY." },
+        "pr_outcome": { "enum": ["open", "merged", "closed"] },
+        "last_pr_check": { "type": "string", "description": "ISO time of the last gh pr view poll." }
       },
       "allOf": [
         {

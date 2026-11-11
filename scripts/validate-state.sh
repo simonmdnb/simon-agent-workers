@@ -56,6 +56,13 @@ def terr($k):
         else "\($k): fail_loops must be an integer 0..3" end),
       (if ($t.pr == null or ($t.pr | isint)) then empty
         else "\($k): pr must be an integer or null" end),
+      (if ($t.queued_reason == null or ($t.queued_reason | IN("daily_limit","active_cap"))) then empty
+        else "\($k): queued_reason must be daily_limit or active_cap" end),
+      (if ($t.pr_outcome == null or ($t.pr_outcome | IN("open","merged","closed"))) then empty
+        else "\($k): pr_outcome must be open, merged or closed" end),
+      (["started_at","ready_at","last_pr_check"][] as $f
+        | if ($t[$f] == null or ($t[$f] | type) == "string") then empty
+          else "\($k): \($f) must be a string" end),
       (if (($t.status | IN("waiting_qa","waiting_simon")) and ($t.assigned_agent != "maintainer") and (($t.pr | isint) | not))
         then "\($k): status \($t.status) requires a pr number" else empty end)
     ] end;
@@ -72,7 +79,29 @@ if type != "object" then ["lead.json must be an object"] else
   (if (.channel_id | nes) then empty else "channel_id must be a non-empty string" end),
   (if (.halted | type) == "boolean" then empty else "halted must be true or false" end),
   (if (.last_heartbeat == null or (.last_heartbeat | type) == "string") then empty
-    else "last_heartbeat must be null or a string" end)
+    else "last_heartbeat must be null or a string" end),
+  (if (.max_tickets_per_day == null or ((.max_tickets_per_day | isint) and .max_tickets_per_day >= 0 and .max_tickets_per_day <= 50)) then empty
+    else "max_tickets_per_day must be an integer 0..50" end),
+  (if (.max_active == null or ((.max_active | isint) and .max_active >= 1 and .max_active <= 5)) then empty
+    else "max_active must be an integer 1..5" end),
+  (if (.review_min_lines == null or ((.review_min_lines | isint) and .review_min_lines >= 0 and .review_min_lines <= 5000)) then empty
+    else "review_min_lines must be an integer 0..5000" end),
+  (if (.started_today == null or ((.started_today | isint) and .started_today >= 0)) then empty
+    else "started_today must be an integer >= 0" end),
+  (if (.day == null or (.day | type == "string" and test("^[0-9]{4}-[0-9]{2}-[0-9]{2}$"))) then empty
+    else "day must be null or YYYY-MM-DD" end),
+  (if (.digest_enabled == null or (.digest_enabled | type) == "boolean") then empty
+    else "digest_enabled must be true or false" end),
+  (if (.digest_time == null or (.digest_time | type == "string" and test("^([01][0-9]|2[0-3]):[0-5][0-9]$"))) then empty
+    else "digest_time must be HH:MM (24h)" end),
+  (if (.simon_user_id == null or (.simon_user_id | type == "string" and test("^[UW][A-Z0-9]+$"))) then empty
+    else "simon_user_id must look like U07KH2WCHKM" end),
+  (if (.halt_reason == null or (.halt_reason | IN("stop_all","members"))) then empty
+    else "halt_reason must be stop_all or members" end),
+  (if (.started_at == null or (.started_at | type) == "string") then empty
+    else "started_at must be a string" end),
+  (if (.last_digest_day == null or (.last_digest_day | type == "string" and test("^[0-9]{4}-[0-9]{2}-[0-9]{2}$"))) then empty
+    else "last_digest_day must be null or YYYY-MM-DD" end)
 ] end | .[]
 '
 

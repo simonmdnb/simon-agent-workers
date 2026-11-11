@@ -47,6 +47,8 @@ Used by the Lead for every Slack post and by role agents for every report back t
 | `<role>, <instruction> <ticket>` | Lead routes the instruction to that role for that ticket |
 | `meta, <instruction>` | Lead creates a `META-<n>` ticket and spawns the maintainer. Delivery is a direct push to `main` of this repo, unless the instruction says `PR` (for example `meta, PR: add a rule to QA`), in which case it opens a PR |
 | `approve META-<n> meta-high-risk` | Approves publishing a change that touches settings, guardrails, `CLAUDE.md`, `publish.sh`, or the maintainer file |
+| `limit` / `limit <n>` | Show or set `max_tickets_per_day` (0 pauses new tickets, max 50). Takes effect immediately; queued tickets start when room opens |
+| `set <name> <value>` / `settings` | Change or show an adjustable setting: `max_tickets_per_day`, `max_active`, `review_min_lines`, `digest_enabled`, `digest_time` |
 | `STATUS` | Lead posts all open tickets with owner, state, and thread links |
 | `STOP ALL` | Lead stops all role agents and takes no action until `RESUME` |
 | `RESUME` | Lead resumes normal operation |
