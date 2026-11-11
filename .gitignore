@@ -1,0 +1,8 @@
+state/*
+!state/tickets/
+state/tickets/*
+!state/tickets/.gitkeep
+
+.claude/settings.local.json
+.DS_Store
+.claude/scheduled_tasks.lock

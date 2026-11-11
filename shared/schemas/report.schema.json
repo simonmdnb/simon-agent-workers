@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "report.schema.json",
+  "title": "Role agent report",
+  "description": "The single JSON object a role agent returns to the Lead as its final message. The jq checks in scripts/validate-state.sh mirror this file; change both together.",
+  "type": "object",
+  "required": ["type", "ticket", "role", "summary", "evidence", "needs"],
+  "properties": {
+    "type": { "enum": ["READY", "QUESTION", "ANSWER", "PASS", "FAIL", "BLOCKED", "INFO"] },
+    "ticket": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9]*-[0-9]+$" },
+    "role": { "enum": ["frontend-dev", "backend-dev", "qa", "product", "designer", "ops-mail"] },
+    "summary": { "type": "string", "minLength": 1, "description": "2 to 3 lines." },
+    "pr": { "type": ["integer", "null"] },
+    "evidence": {
+      "type": "array",
+      "description": "Commands actually run and the relevant output lines.",
+      "items": {
+        "type": "object",
+        "required": ["command", "output"],
+        "properties": {
+          "command": { "type": "string", "minLength": 1 },
+          "output": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "needs": { "type": "string", "description": "What is needed from the Lead or Simon. Empty string if nothing." },
+    "not_verified": { "type": "array", "items": { "type": "string" } },
+    "notes_file": { "type": "string" },
+    "repro": { "type": "string", "description": "Steps to reproduce. Required for FAIL." },
+    "criteria": {
+      "type": "array",
+      "description": "QA: one entry per acceptance criterion.",
+      "items": {
+        "type": "object",
+        "required": ["criterion", "status"],
+        "properties": {
+          "criterion": { "type": "string" },
+          "status": { "enum": ["met", "not_met", "not_verified"] }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "description": "Product: where each claim comes from. Required for ANSWER.",
+      "items": {
+        "type": "object",
+        "required": ["where", "quote"],
+        "properties": {
+          "where": { "type": "string" },
+          "quote": { "type": "string" }
+        }
+      }
+    },
+    "conflicts": { "type": "array", "items": { "type": "string" } },
+    "question_for_simon": { "type": "string" },
+    "findings": {
+      "type": "array",
+      "description": "Designer: ranked findings.",
+      "items": {
+        "type": "object",
+        "required": ["rank", "issue"],
+        "properties": {
+          "rank": { "enum": ["must_fix", "should_fix", "nice_to_have"] },
+          "file": { "type": "string" },
+          "line": { "type": "integer" },
+          "issue": { "type": "string" },
+          "why": { "type": "string" }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "description": "Which types each role may return.",
+      "oneOf": [
+        { "properties": { "role": { "enum": ["frontend-dev", "backend-dev"] }, "type": { "enum": ["READY", "QUESTION", "BLOCKED"] } } },
+        { "properties": { "role": { "enum": ["qa", "designer"] }, "type": { "enum": ["PASS", "FAIL", "BLOCKED"] } } },
+        { "properties": { "role": { "const": "product" }, "type": { "enum": ["ANSWER", "BLOCKED"] } } },
+        { "properties": { "role": { "const": "ops-mail" }, "type": { "enum": ["INFO", "BLOCKED"] } } }
+      ]
+    },
+    {
+      "if": { "properties": { "type": { "const": "READY" } }, "required": ["type"] },
+      "then": { "required": ["pr"], "properties": { "pr": { "type": "integer" } } }
+    },
+    {
+      "if": { "properties": { "type": { "enum": ["PASS", "FAIL"] } }, "required": ["type"] },
+      "then": { "properties": { "evidence": { "minItems": 1 } } }
+    },
+    {
+      "if": { "properties": { "type": { "const": "FAIL" } }, "required": ["type"] },
+      "then": { "required": ["repro"], "properties": { "repro": { "minLength": 1 } } }
+    },
+    {
+      "if": { "properties": { "type": { "enum": ["QUESTION", "BLOCKED"] } }, "required": ["type"] },
+      "then": { "properties": { "needs": { "minLength": 1 } } }
+    },
+    {
+      "if": { "properties": { "type": { "const": "ANSWER" } }, "required": ["type"] },
+      "then": { "required": ["sources"] }
+    }
+  ]
+}
