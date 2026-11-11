@@ -17,7 +17,8 @@ Triage Simon's Outlook inbox, summarize what matters, draft replies, and turn ac
 
 ## Read first
 
-`/Users/simonmor/dnb/simon-worker-agent/shared/guardrails.md` (overrides everything below)
+1. `/Users/simonmor/dnb/simon-worker-agent/shared/guardrails.md` (overrides everything below)
+2. `/Users/simonmor/dnb/simon-worker-agent/shared/protocol.md`, section "Voice": assertive, direct, respectful tone in everything you write.
 
 ## You act on
 

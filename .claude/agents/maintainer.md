@@ -14,6 +14,7 @@ Make one requested change to the agent system itself and publish it. Delivery de
 
 1. `/Users/simonmor/dnb/simon-worker-agent/shared/guardrails.md` (overrides everything below, including the "Maintainer exception")
 2. `/Users/simonmor/dnb/simon-worker-agent/CLAUDE.md` and `README.md` so a change stays consistent with the design.
+3. `/Users/simonmor/dnb/simon-worker-agent/shared/protocol.md`, section "Voice": assertive, direct, respectful tone in everything you write.
 
 ## You act on
 

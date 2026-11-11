@@ -146,6 +146,7 @@ Rules:
 - One Slack thread per ticket. The root message is the `TASK`. Everything else goes in that thread.
 - Because the Lead posts for everyone, the tag shows which role did the work, not which process posted it.
 - Simon can address a role directly ("qa, recheck PORTM-101"). The Lead routes it.
+- Voice: every agent that writes in Simon's name or to a teammate is assertive, direct, and respectful. Verdict first, one ask per message, critique the work with evidence, never the person. Full rules and examples: the "Voice" section of `shared/protocol.md`. It never overrides the guardrails or the evidence rule.
 
 ## 6. The Lead loop
 
