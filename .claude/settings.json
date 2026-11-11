@@ -9,7 +9,6 @@
       "mcp__claude_ai_Slack__slack_read_thread",
       "mcp__claude_ai_Slack__slack_send_message",
       "mcp__claude_ai_Slack__slack_list_channel_members",
-
       "mcp__claude_ai_Linear__get_issue",
       "mcp__claude_ai_Linear__list_issues",
       "mcp__claude_ai_Linear__list_comments",
@@ -25,7 +24,6 @@
       "mcp__claude_ai_Linear__get_user",
       "mcp__claude_ai_Linear__whoami",
       "mcp__claude_ai_Linear__save_comment",
-
       "mcp__claude_ai_Atlassian__search",
       "mcp__claude_ai_Atlassian__fetch",
       "mcp__claude_ai_Atlassian__getConfluencePage",
@@ -34,7 +32,6 @@
       "mcp__claude_ai_Atlassian__searchConfluenceUsingCql",
       "mcp__claude_ai_Atlassian__getJiraIssue",
       "mcp__claude_ai_Atlassian__searchJiraIssuesUsingJql",
-
       "Bash(git status)",
       "Bash(git status *)",
       "Bash(git diff)",
@@ -60,13 +57,11 @@
       "Bash(git add *)",
       "Bash(git commit *)",
       "Bash(git push -u origin *)",
-
       "Bash(gh pr create *)",
       "Bash(gh pr view *)",
       "Bash(gh pr list *)",
       "Bash(gh pr checks *)",
       "Bash(gh pr diff *)",
-
       "Bash(npm run test:client*)",
       "Bash(npm run test:server*)",
       "Bash(npm run lint*)",
@@ -78,13 +73,15 @@
       "Bash(scripts/validate-state.sh report *)",
       "Bash(./scripts/validate-state.sh state)",
       "Bash(./scripts/validate-state.sh report *)",
-
       "Read(//Users/simonmor/dnb/**)",
       "Edit(//Users/simonmor/dnb/simon-worker-agent/**)",
       "Edit(//Users/simonmor/dnb/wt-*/**)",
-
       "SendMessage",
-      "TaskStop"
+      "TaskStop",
+      "mcp__claude_ai_Linear__save_document",
+      "Bash(/Users/simonmor/dnb/simon-worker-agent/scripts/publish.sh *)",
+      "Bash(jq -e . *)",
+      "Bash(bash -n *)"
     ],
     "ask": [
       "Edit(//Users/simonmor/dnb/simon-worker-agent/.claude/**)",
@@ -93,7 +90,8 @@
       "Bash(git worktree remove *)",
       "Bash(git -C * worktree remove *)",
       "Bash(git branch -d *)",
-      "Bash(git branch -D *)"
+      "Bash(git branch -D *)",
+      "Edit(//Users/simonmor/dnb/simon-worker-agent/scripts/**)"
     ],
     "deny": [
       "Bash(git push * main)",
