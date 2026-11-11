@@ -110,7 +110,7 @@ Each role is a subagent definition file in `.claude/agents/` (frontmatter + prom
 | `[BE]` | `backend-dev.md` | `server/` and `c360-api` work. Branch, code, tests, PR. | Touch `client/`. Merge. |
 | `[QA]` | `qa.md` | Checks out the PR branch, runs tests and lint, verifies acceptance criteria, reports pass or fail with real output | Fix the code itself. Pass without running commands. |
 | `[PRODUCT]` | `product.md` | Answers questions from Linear specs, PRDs, Confluence. Clarifies acceptance criteria. Says "not in the spec, asking Simon" when unsure | Invent requirements. |
-| `[DESIGN]` | `designer.md` | UI/UX review against Figma and x-core, Impeccable skill (`audit`, `polish`) on UI PRs | Change business logic. |
+| `[DESIGN]` | `designer.md` | UI/UX review against Figma (read-only Figma MCP tools) and x-core, Impeccable skill (`audit`, `polish`) on UI PRs | Change business logic. |
 | `[OPS]` (later) | `ops-mail.md` | Outlook triage, drafts, summaries, Linear issues from mail | Send mail without Simon's OK. |
 
 More roles (Security, Docs, Release): copy an agent file, change the boundaries.

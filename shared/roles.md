@@ -7,7 +7,7 @@ One file per role. The Lead spawns them by name (`frontend-dev`, `backend-dev`, 
 | Frontend Dev `[FE]` | `frontend-dev.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `receiving-code-review`, `impeccable` | yes |
 | Backend Dev `[BE]` | `backend-dev.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `receiving-code-review` | yes |
 | QA `[QA]` | `qa.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `verification-before-completion`, `run`, `systematic-debugging`, `webapp-testing` (needs Python Playwright, not installed) | yes |
-| Designer `[DESIGN]` | `designer.md` | Bash, Skill, Linear (read) | `impeccable` (audit and polish, as critique only), `cial-dnb-design` (company design system, review reference only) | yes |
+| Designer `[DESIGN]` | `designer.md` | Bash, Skill, Linear (read), Figma (read only) | `impeccable` (audit and polish, as critique only), `cial-dnb-design` (company design system, review reference only) | yes |
 | Product `[PRODUCT]` | `product.md` | Linear and Atlassian (read only) | none | no |
 | Maintainer `[META]` | `maintainer.md` | Edit, Write, Bash, Skill | `writing-skills`, `verification-before-completion`, `claude-md-management:claude-md-improver` | yes |
 | Ops / Mail `[OPS]` | `ops-mail.md` | none (disabled until Phase 8) | none | no |
