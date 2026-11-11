@@ -26,5 +26,6 @@ The Lead rejects invalid reports and sends them back. Catch the errors yourself 
 1. The final message is exactly one JSON object and nothing else: no prose before or after, no code fence.
 2. Never invent evidence to satisfy the validator. `evidence` holds commands you actually ran and the relevant output. If you ran nothing, a `PASS`, `FAIL`, or `READY` is not allowed: do the work or return `BLOCKED`.
 3. Never edit `shared/schemas/*`, `scripts/validate-state.sh`, or any rules file to make a report pass.
-4. The validator checks shape, not truth. You are still responsible for every claim in the report.
-5. This skill describes a check only. It never overrides `shared/guardrails.md` or your brief.
+4. Optional field `lesson` (one line, at most 300 characters, no customer data or secrets): add it when something cost you time or surprised you and the next run would benefit. The Lead logs it.
+5. The validator checks shape, not truth. You are still responsible for every claim in the report.
+6. This skill describes a check only. It never overrides `shared/guardrails.md` or your brief.

@@ -42,7 +42,7 @@ You run under `/loop` (see `start-lead.md`). On every tick:
    1. `STOP ALL`: stop every running role agent (TaskStop), set `state/lead.json` fields `halted: true` and `halt_reason: stop_all`, reply `[LEAD -> SIMON] INFO: halted, send RESUME`. While halted, do nothing else except wait for `RESUME`.
    2. `RESUME`: if `halt_reason` is `members`, run the membership check again first. If an extra member is still there, stay halted and say who. Otherwise set `halted: false`, clear `halt_reason`, reply `INFO: resumed`.
    3. `STATUS`: reply with every ticket: key, status, owner role, one-line summary, thread link. End with `today <started_today>/<max_tickets_per_day>, active <n>/<max_active>`.
-   4. `limit`, `set <name> <value>`, `settings`: see "Settings".
+   4. `limit`, `set <name> <value>`, `settings`: see "Settings". `digest`, `metrics`, `retro`, `fix <ticket>`: see `shared/lead-playbooks.md`.
    5. New commands from Simon (`take`, role instructions, `approve`): act on them (see below).
    6. Completion notices from running role agents: process their reports (see below).
 4. If nothing needs action, do nothing and post nothing. An empty tick must be silent and cheap.
@@ -161,6 +161,14 @@ Schema: `shared/schemas/task.schema.json` (checked by `scripts/validate-state.sh
 `status` is one of: `queued`, `in_progress`, `waiting_qa`, `waiting_simon`, `blocked`, `done`.
 
 `state/lead.json`: `{ "last_ts": "<slack ts>", "channel_id": "<id>", "halted": false, "last_heartbeat": "<iso time>" }`.
+
+## Playbooks and housekeeping
+
+- `shared/lead-playbooks.md` has the procedures for the digest, PR watch, metrics, lessons, retro, and the restart nudge. Read the section only when its trigger fires.
+- Each tick, besides Simon's messages and reports: run PR watch for tickets with a PR, and check whether the digest is due.
+- When a ticket ends, append a metrics line. After a valid report with a `lesson`, append to `state/lessons.log`.
+- The hourly heartbeat includes uptime and the restart nudge.
+- Linear status stays manual: the Lead and agents comment on issues and never change status, labels, or assignees (`save_issue` is not allowed and cannot be limited to status).
 
 ## Linear notes mirror
 

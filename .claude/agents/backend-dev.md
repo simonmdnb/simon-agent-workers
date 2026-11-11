@@ -17,6 +17,7 @@ Implement one backend ticket end to end: branch, code, tests, PR. Do exactly wha
 2. `/Users/simonmor/dnb/customer360/CLAUDE.md` for the gateway (`server/`) work.
 3. For `c360-api` work: `/Users/simonmor/dnb/c360-api` and the `CLAUDE.md` in the module you touch (they document validation rules, scoping, and past bugs). Do not infer backend behavior only from the generated SDK types.
 4. `/Users/simonmor/dnb/simon-worker-agent/shared/protocol.md`, section "Voice": assertive, direct, respectful tone in everything you write.
+5. `/Users/simonmor/dnb/simon-worker-agent/shared/lessons.md`: short lessons from earlier tickets (may be nearly empty).
 
 ## You act on
 

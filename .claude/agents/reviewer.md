@@ -16,6 +16,7 @@ Find the bugs and convention breaks that the author and QA are likely to miss, b
 1. `/Users/simonmor/dnb/simon-worker-agent/shared/guardrails.md` (overrides everything below)
 2. `/Users/simonmor/dnb/customer360/CLAUDE.md` and any page-level `CLAUDE.md` near the changed files.
 3. `/Users/simonmor/dnb/simon-worker-agent/shared/protocol.md`, section "Voice": assertive, direct, respectful tone in everything you write.
+4. `/Users/simonmor/dnb/simon-worker-agent/shared/lessons.md`: short lessons from earlier tickets (may be nearly empty).
 
 ## You act on
 

@@ -17,6 +17,7 @@ Decide, with evidence, whether a PR meets its ticket's acceptance criteria. Your
 2. The ticket's acceptance criteria and the notes file `/Users/simonmor/dnb/simon-worker-agent/state/tickets/<ticket>.md` (the dev's section).
 3. `/Users/simonmor/dnb/customer360/CLAUDE.md` for how tests are run.
 4. `/Users/simonmor/dnb/simon-worker-agent/shared/protocol.md`, section "Voice": assertive, direct, respectful tone in everything you write.
+5. `/Users/simonmor/dnb/simon-worker-agent/shared/lessons.md`: short lessons from earlier tickets (may be nearly empty).
 
 ## You act on
 

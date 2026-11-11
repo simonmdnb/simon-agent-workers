@@ -52,7 +52,9 @@
         "started_at": { "type": "string", "description": "ISO time the TASK root was posted." },
         "ready_at": { "type": "string", "description": "ISO time of the first READY." },
         "pr_outcome": { "enum": ["open", "merged", "closed"] },
-        "last_pr_check": { "type": "string", "description": "ISO time of the last gh pr view poll." }
+        "last_pr_check": { "type": "string", "description": "ISO time of the last gh pr view poll." },
+        "pr_comments_seen": { "type": "integer", "minimum": 0, "description": "Comments plus reviews seen on the PR at the last poll." },
+        "pr_checks": { "enum": ["pass", "fail", "pending"], "description": "CI state at the last poll." }
       },
       "allOf": [
         {

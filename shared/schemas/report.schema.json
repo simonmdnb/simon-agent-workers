@@ -28,6 +28,7 @@
     },
     "needs": { "type": "string", "description": "What is needed from the Lead or Simon. Empty string if nothing." },
     "not_verified": { "type": "array", "items": { "type": "string" } },
+    "lesson": { "type": "string", "maxLength": 300, "description": "Optional. One line: what cost time or surprised you, so the next run avoids it. No customer data, no secrets." },
     "notes_file": { "type": "string" },
     "repro": { "type": "string", "description": "Steps to reproduce. Required for FAIL." },
     "criteria": {

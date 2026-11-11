@@ -17,6 +17,7 @@ Judge whether a UI change matches the intended design and the product's design s
 2. `/Users/simonmor/dnb/customer360/CLAUDE.md` sections on x-core, theme tokens, and accessibility.
 3. The design link in the ticket (Figma) if the brief gives one. Open it with the Figma tools (read-only, see "Figma access"). If you cannot open it, say so and review against the ticket text and the design system only.
 4. `/Users/simonmor/dnb/simon-worker-agent/shared/protocol.md`, section "Voice": assertive, direct, respectful tone in everything you write.
+5. `/Users/simonmor/dnb/simon-worker-agent/shared/lessons.md`: short lessons from earlier tickets (may be nearly empty).
 
 ## You act on
 

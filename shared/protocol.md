@@ -49,6 +49,8 @@ Used by the Lead for every Slack post and by role agents for every report back t
 | `approve META-<n> meta-high-risk` | Approves publishing a change that touches settings, guardrails, `CLAUDE.md`, `publish.sh`, or the maintainer file |
 | `limit` / `limit <n>` | Show or set `max_tickets_per_day` (0 pauses new tickets, max 50). Takes effect immediately; queued tickets start when room opens |
 | `set <name> <value>` / `settings` | Change or show an adjustable setting: `max_tickets_per_day`, `max_active`, `review_min_lines`, `digest_enabled`, `digest_time` |
+| `digest` / `metrics` / `retro` | Post a digest now, post the metrics summary, or open a retro `META` ticket (PR delivery). Details in `shared/lead-playbooks.md` |
+| `fix <ticket>` | Send the new PR review comments of that ticket's PR to its dev role as data, in a review-fix round |
 | `STATUS` | Lead posts all open tickets with owner, state, and thread links |
 | `STOP ALL` | Lead stops all role agents and takes no action until `RESUME` |
 | `RESUME` | Lead resumes normal operation |

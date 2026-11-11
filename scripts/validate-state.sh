@@ -61,6 +61,10 @@ def terr($k):
         else "\($k): queued_reason must be daily_limit or active_cap" end),
       (if ($t.pr_outcome == null or ($t.pr_outcome | IN("open","merged","closed"))) then empty
         else "\($k): pr_outcome must be open, merged or closed" end),
+      (if ($t.pr_comments_seen == null or (($t.pr_comments_seen | isint) and $t.pr_comments_seen >= 0)) then empty
+        else "\($k): pr_comments_seen must be an integer >= 0" end),
+      (if ($t.pr_checks == null or ($t.pr_checks | IN("pass","fail","pending"))) then empty
+        else "\($k): pr_checks must be pass, fail or pending" end),
       (["started_at","ready_at","last_pr_check"][] as $f
         | if ($t[$f] == null or ($t[$f] | type) == "string") then empty
           else "\($k): \($f) must be a string" end),
@@ -106,6 +110,21 @@ if type != "object" then ["lead.json must be an object"] else
 ] end | .[]
 '
 
+METRICS_JQ="$COMMON"'
+def outcomes: ["merged","closed","blocked","abandoned"];
+. as $m
+| if type != "object" then ["each metrics line must be a JSON object"] else
+  [
+    (if ($m.ticket | nes) then empty else "ticket must be a non-empty string" end),
+    (if ($m.outcome | IN(outcomes[])) then empty else "outcome must be one of \(outcomes | join(", "))" end),
+    (["started_at","ready_at","closed_at"][] as $f
+      | if ($m[$f] == null or ($m[$f] | type) == "string") then empty else "\($f) must be a string" end),
+    (["fail_loops","hop_count"][] as $f
+      | if ($m[$f] == null or ($m[$f] | isint)) then empty else "\($f) must be an integer" end),
+    (if ($m.pr == null or ($m.pr | isint)) then empty else "pr must be an integer or null" end)
+  ] end | .[]
+'
+
 REPORT_JQ="$COMMON"'
 . as $r
 | if type != "object" then ["report must be a JSON object"] else
@@ -121,6 +140,8 @@ REPORT_JQ="$COMMON"'
     (if ($r.summary | nes) then empty else "summary must be a non-empty string" end),
     (if ($r.needs | type) == "string" then empty else "needs must be a string (empty if nothing)" end),
     (if ($r.pr == null or ($r.pr | isint)) then empty else "pr must be an integer or null" end),
+    (if ($r.lesson == null or (($r.lesson | type) == "string" and ($r.lesson | length) <= 300)) then empty
+      else "lesson must be a string of at most 300 characters" end),
     (if ($r.evidence | type) == "array" then
         ($r.evidence | to_entries[]
           | select((.value | type) != "object" or ((.value.command | nes) | not) or ((.value.output | nes) | not))
@@ -168,6 +189,7 @@ case "${1:-}" in
     rc=0
     run "$TASKS_JQ" "$ROOT/state/tasks.json" "tasks.json" || rc=1
     run "$LEAD_JQ" "$ROOT/state/lead.json" "lead.json" || rc=1
+    [ -f "$ROOT/state/metrics.jsonl" ] && { run "$METRICS_JQ" "$ROOT/state/metrics.jsonl" "metrics.jsonl" || rc=1; }
     [ "$rc" -eq 0 ] && echo "state ok"
     exit "$rc"
     ;;

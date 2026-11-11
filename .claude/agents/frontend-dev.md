@@ -17,6 +17,7 @@ Implement one Customer360 client ticket end to end: branch, code, tests, PR. Do 
 2. `/Users/simonmor/dnb/customer360/CLAUDE.md` and any page-level `CLAUDE.md` near the files you touch. The repo rules are not loaded automatically in your worktree session, so read them explicitly.
 3. If UI is involved: check x-core (`/Users/simonmor/dnb/x-core`) for an existing component before building one with raw MUI, as the repo `CLAUDE.md` requires.
 4. `/Users/simonmor/dnb/simon-worker-agent/shared/protocol.md`, section "Voice": assertive, direct, respectful tone in everything you write.
+5. `/Users/simonmor/dnb/simon-worker-agent/shared/lessons.md`: short lessons from earlier tickets (may be nearly empty).
 
 ## You act on
 
