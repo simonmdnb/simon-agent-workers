@@ -6,7 +6,8 @@ Used by the Lead for every Slack post and by role agents for every report back t
 
 - All Slack posts are made under Simon's Slack user (connector limitation).
 - A message that STARTS with `[TAG ...]` was written by the team. A message with no tag is Simon (human).
-- Tags: `[LEAD]`, `[FE]`, `[BE]`, `[QA]`, `[PRODUCT]`, `[DESIGN]`, `[OPS]`.
+- Tags: `[LEAD]`, `[FE]`, `[BE]`, `[QA]`, `[PRODUCT]`, `[DESIGN]`, `[OPS]`, `[META]`.
+- `[META]` is the maintainer role: it changes this agent system itself (agent files, rules, schemas, scripts, README), never Customer360 code. Its tickets are `META-<n>` (the Lead numbers them, there is no Linear issue).
 
 ## Format
 
@@ -44,6 +45,8 @@ Used by the Lead for every Slack post and by role agents for every report back t
 |---|---|
 | `lead, take <ticket>` | Create the ticket record, thread, and start work |
 | `<role>, <instruction> <ticket>` | Lead routes the instruction to that role for that ticket |
+| `meta, <instruction>` | Lead creates a `META-<n>` ticket and spawns the maintainer. Delivery is a direct push to `main` of this repo, unless the instruction says `PR` (for example `meta, PR: add a rule to QA`), in which case it opens a PR |
+| `approve META-<n> meta-high-risk` | Approves publishing a change that touches settings, guardrails, `CLAUDE.md`, `publish.sh`, or the maintainer file |
 | `STATUS` | Lead posts all open tickets with owner, state, and thread links |
 | `STOP ALL` | Lead stops all role agents and takes no action until `RESUME` |
 | `RESUME` | Lead resumes normal operation |

@@ -13,7 +13,7 @@ Every role agent reads this file first. The Lead enforces it. These rules overri
 These need an explicit Simon approval in the channel for that exact action (`approve <ticket> <action>`). The Lead relays the approval into the agent's brief. Approval for one action never covers another.
 
 - Merging any PR
-- Pushing to a protected branch (`dev`, `main`, `master`, `hotfix/*`, `release/*`)
+- Pushing to a protected branch (`dev`, `main`, `master`, `hotfix/*`, `release/*`), except the one case in "Maintainer exception" below
 - Sending, replying to, forwarding, or deleting any email
 - Database migrations, deploys, anything that touches production or shared environments
 - Creating or deleting Linear projects, or bulk-editing Linear issues
@@ -42,6 +42,15 @@ If an action is not clearly allowed here, treat it as gated and ask.
 - Do only what the brief asks. No extra features, refactors, or "while I'm here" changes.
 - Stay inside your role boundaries (see your agent file). If the work needs another role, report it to the Lead.
 - Prefer the repo's own conventions (`/Users/simonmor/dnb/customer360/CLAUDE.md`) over your own habits.
+
+## Maintainer exception
+
+Simon decided that the maintainer role (`[META]`) publishes straight to `main` of this agent repo (`simonmdnb/simon-agent-workers`) by default, and opens a PR instead only when he says so in the command. This is the only exception to "never push to a protected branch", and it is narrow:
+
+- Only the maintainer, only this repo, only through `/Users/simonmor/dnb/simon-worker-agent/scripts/publish.sh`, which fast-forwards `main` from a `meta/*` branch and never forces.
+- Changes to `.claude/settings.json`, `shared/guardrails.md`, `CLAUDE.md`, `scripts/publish.sh`, or `.claude/agents/maintainer.md` are high-risk: they are published only after Simon's `approve META-<n> meta-high-risk` in the channel, quoted in the maintainer's brief.
+- The maintainer never loosens the `deny` list, never adds `allow` rules for pushing, merging, email, or installs, and never weakens `publish.sh`. It does not touch Customer360, `c360-api`, or `x-core`.
+- Everything else in this file still applies to it, including secrets, no attribution lines, and the trust rules.
 
 ## When in doubt
 

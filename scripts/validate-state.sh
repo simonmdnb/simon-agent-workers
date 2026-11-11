@@ -21,7 +21,7 @@ COMMON='
 def isint: type == "number" and . == floor;
 def nes: type == "string" and length > 0;
 def states: ["queued","in_progress","waiting_qa","waiting_simon","blocked","done"];
-def roles: ["frontend-dev","backend-dev","qa","product","designer","ops-mail"];
+def roles: ["frontend-dev","backend-dev","qa","product","designer","ops-mail","maintainer"];
 def types: ["READY","QUESTION","ANSWER","PASS","FAIL","BLOCKED","INFO"];
 def allowed: {
   "frontend-dev": ["READY","QUESTION","BLOCKED"],
@@ -29,7 +29,8 @@ def allowed: {
   "qa":           ["PASS","FAIL","BLOCKED"],
   "designer":     ["PASS","FAIL","BLOCKED"],
   "product":      ["ANSWER","BLOCKED"],
-  "ops-mail":     ["INFO","BLOCKED"]
+  "ops-mail":     ["INFO","BLOCKED"],
+  "maintainer":   ["READY","QUESTION","BLOCKED"]
 };
 def ticket_re: "^[A-Za-z][A-Za-z0-9]*-[0-9]+$";
 def ts_re: "^[0-9]+\\.[0-9]+$";
@@ -55,7 +56,7 @@ def terr($k):
         else "\($k): fail_loops must be an integer 0..3" end),
       (if ($t.pr == null or ($t.pr | isint)) then empty
         else "\($k): pr must be an integer or null" end),
-      (if (($t.status | IN("waiting_qa","waiting_simon")) and (($t.pr | isint) | not))
+      (if (($t.status | IN("waiting_qa","waiting_simon")) and ($t.assigned_agent != "maintainer") and (($t.pr | isint) | not))
         then "\($k): status \($t.status) requires a pr number" else empty end)
     ] end;
 if type != "object" then ["tasks.json must be an object keyed by ticket id"]
@@ -95,7 +96,16 @@ REPORT_JQ="$COMMON"'
           | select((.value | type) != "object" or ((.value.command | nes) | not) or ((.value.output | nes) | not))
           | "evidence[\(.key)] needs a non-empty command and output")
       else "evidence must be an array (empty if none)" end),
-    (if ($r.type == "READY" and (($r.pr | isint) | not)) then "READY needs a pr number" else empty end),
+    (if ($r.type == "READY" and $r.role != "maintainer" and (($r.pr | isint) | not)) then "READY needs a pr number" else empty end),
+    (if ($r.type == "READY" and $r.role == "maintainer") then
+        ((if (($r.commit | type) == "string" and ($r.commit | test("^[0-9a-f]{7,40}$"))) then empty
+            else "maintainer READY needs commit (a git sha)" end),
+         (if ($r.delivery | IN("direct","pr")) then empty
+            else "maintainer READY needs delivery: direct or pr" end),
+         (if ($r.delivery == "pr" and (($r.pr | isint) | not)) then "maintainer READY with delivery pr needs a pr number" else empty end),
+         (if (($r.evidence | type) != "array" or ($r.evidence | length) == 0)
+            then "maintainer READY needs at least one evidence entry" else empty end))
+      else empty end),
     (if (($r.type | IN("PASS","FAIL")) and ((($r.evidence | type) != "array") or (($r.evidence | length) == 0)))
       then "\($r.type) needs at least one evidence entry (command and output)" else empty end),
     (if ($r.type == "FAIL" and (($r.repro | nes) | not)) then "FAIL needs a repro" else empty end),

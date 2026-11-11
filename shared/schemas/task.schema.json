@@ -39,7 +39,7 @@
           "enum": ["queued", "in_progress", "waiting_qa", "waiting_simon", "blocked", "done"]
         },
         "assigned_agent": {
-          "enum": ["frontend-dev", "backend-dev", "qa", "product", "designer", "ops-mail"]
+          "enum": ["frontend-dev", "backend-dev", "qa", "product", "designer", "ops-mail", "maintainer"]
         },
         "agent_id": { "type": "string", "description": "Id of the running role agent, empty if none is alive." },
         "hop_count": { "type": "integer", "minimum": 0, "maximum": 6 },
@@ -51,7 +51,13 @@
       },
       "allOf": [
         {
-          "if": { "properties": { "status": { "enum": ["waiting_qa", "waiting_simon"] } }, "required": ["status"] },
+          "if": {
+            "properties": {
+              "status": { "enum": ["waiting_qa", "waiting_simon"] },
+              "assigned_agent": { "not": { "const": "maintainer" } }
+            },
+            "required": ["status"]
+          },
           "then": { "required": ["pr"], "properties": { "pr": { "type": "integer" } } }
         }
       ]

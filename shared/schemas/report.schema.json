@@ -8,7 +8,10 @@
   "properties": {
     "type": { "enum": ["READY", "QUESTION", "ANSWER", "PASS", "FAIL", "BLOCKED", "INFO"] },
     "ticket": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9]*-[0-9]+$" },
-    "role": { "enum": ["frontend-dev", "backend-dev", "qa", "product", "designer", "ops-mail"] },
+    "role": { "enum": ["frontend-dev", "backend-dev", "qa", "product", "designer", "ops-mail", "maintainer"] },
+    "commit": { "type": "string", "pattern": "^[0-9a-f]{7,40}$", "description": "Maintainer: sha of the commit that was published." },
+    "delivery": { "enum": ["direct", "pr"], "description": "Maintainer: direct push to main, or a PR." },
+    "restart_needed": { "type": "boolean", "description": "Maintainer: the change only takes effect after the Lead restarts." },
     "summary": { "type": "string", "minLength": 1, "description": "2 to 3 lines." },
     "pr": { "type": ["integer", "null"] },
     "evidence": {
@@ -73,15 +76,32 @@
     {
       "description": "Which types each role may return.",
       "oneOf": [
-        { "properties": { "role": { "enum": ["frontend-dev", "backend-dev"] }, "type": { "enum": ["READY", "QUESTION", "BLOCKED"] } } },
+        { "properties": { "role": { "enum": ["frontend-dev", "backend-dev", "maintainer"] }, "type": { "enum": ["READY", "QUESTION", "BLOCKED"] } } },
         { "properties": { "role": { "enum": ["qa", "designer"] }, "type": { "enum": ["PASS", "FAIL", "BLOCKED"] } } },
         { "properties": { "role": { "const": "product" }, "type": { "enum": ["ANSWER", "BLOCKED"] } } },
         { "properties": { "role": { "const": "ops-mail" }, "type": { "enum": ["INFO", "BLOCKED"] } } }
       ]
     },
     {
-      "if": { "properties": { "type": { "const": "READY" } }, "required": ["type"] },
+      "if": {
+        "properties": { "type": { "const": "READY" }, "role": { "not": { "const": "maintainer" } } },
+        "required": ["type"]
+      },
       "then": { "required": ["pr"], "properties": { "pr": { "type": "integer" } } }
+    },
+    {
+      "description": "Maintainer READY: a commit sha, a delivery mode, evidence, and a PR number when the delivery is a PR.",
+      "if": { "properties": { "type": { "const": "READY" }, "role": { "const": "maintainer" } }, "required": ["type", "role"] },
+      "then": {
+        "required": ["commit", "delivery"],
+        "properties": { "evidence": { "minItems": 1 } },
+        "allOf": [
+          {
+            "if": { "properties": { "delivery": { "const": "pr" } }, "required": ["delivery"] },
+            "then": { "required": ["pr"], "properties": { "pr": { "type": "integer" } } }
+          }
+        ]
+      }
     },
     {
       "if": { "properties": { "type": { "enum": ["PASS", "FAIL"] } }, "required": ["type"] },
