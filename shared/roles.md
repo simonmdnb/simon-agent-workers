@@ -4,7 +4,7 @@ One file per role. The Lead spawns them by name (`frontend-dev`, `backend-dev`, 
 
 | Role (tag) | File | Tools beyond Read/Grep/Glob | Role skills | Baseline skills* |
 |---|---|---|---|---|
-| Frontend Dev `[FE]` | `frontend-dev.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `receiving-code-review`, `impeccable` | yes |
+| Frontend Dev `[FE]` | `frontend-dev.md` | Edit, Write, Bash, Skill, Linear (read, comment), Figma (read only) | `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `receiving-code-review`, `impeccable` | yes |
 | Backend Dev `[BE]` | `backend-dev.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `receiving-code-review` | yes |
 | QA `[QA]` | `qa.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `verification-before-completion`, `run`, `systematic-debugging`, `webapp-testing` (needs Python Playwright, not installed) | yes |
 | Designer `[DESIGN]` | `designer.md` | Bash, Skill, Linear (read), Figma (read only) | `impeccable` (audit and polish, as critique only), `cial-dnb-design` (company design system, review reference only) | yes |

@@ -106,7 +106,7 @@ Each role is a subagent definition file in `.claude/agents/` (frontmatter + prom
 | Tag | Agent file | Does | Must NOT |
 |---|---|---|---|
 | `[LEAD]` | (the main session, `CLAUDE.md`) | Reads Simon's commands, splits work, spawns and relays between role agents, tracks status in Linear and `state/tasks.json`, posts all updates, closes the loop, escalates to Simon | Write code. Merge PRs. |
-| `[FE]` | `frontend-dev.md` | Customer360 client work (React/TS). Branch, code, tests, PR. Follows the customer360 `CLAUDE.md`. | Touch `server/` or backend repos. Merge. |
+| `[FE]` | `frontend-dev.md` | Customer360 client work (React/TS). Reads the Figma design (read-only). Branch, code, tests, PR. Follows the customer360 `CLAUDE.md`. | Touch `server/` or backend repos. Merge. |
 | `[BE]` | `backend-dev.md` | `server/` and `c360-api` work. Branch, code, tests, PR. | Touch `client/`. Merge. |
 | `[QA]` | `qa.md` | Checks out the PR branch, runs tests and lint, verifies acceptance criteria, reports pass or fail with real output | Fix the code itself. Pass without running commands. |
 | `[PRODUCT]` | `product.md` | Answers questions from Linear specs, PRDs, Confluence. Clarifies acceptance criteria. Says "not in the spec, asking Simon" when unsure | Invent requirements. |
