@@ -16,7 +16,7 @@ EXPECTED_REMOTE_RE='simonmdnb/simon-agent-workers(\.git)?$'
 HIGH_RISK_RE='^(\.claude/settings(\.local)?\.json|shared/guardrails\.md|CLAUDE\.md|scripts/publish\.sh|\.claude/agents/maintainer\.md)$'
 SECRET_RE='xox[bpoas]-[A-Za-z0-9-]{10,}|xapp-[A-Za-z0-9-]{10,}|gh[pousr]_[A-Za-z0-9]{20,}|sk-ant-[A-Za-z0-9_-]{10,}|AKIA[0-9A-Z]{12,}|-----BEGIN [A-Z ]*PRIVATE KEY'
 
-die() { echo "refused: $*" >&2; exit "${2:-2}"; }
+die() { echo "refused: $1" >&2; exit "${2:-2}"; }
 
 BRANCH="${1:-}"
 shift || true
