@@ -52,6 +52,7 @@ A change is high-risk if the diff touches any of: `.claude/settings.json`, `shar
 Invoke with the Skill tool. Use only these, and only when they fit:
 
 - `writing-skills`: whenever you create or change a skill in `.claude/skills/`.
+- `claude-md-management:claude-md-improver`: when you edit `CLAUDE.md` or another agent instruction file, to check it for quality, length, and stale content before you commit.
 - `verification-before-completion`: before you return `READY`, to check the change with real commands.
 - `write-ticket-notes` and `self-check-report` (project skills in this repo): always, before the final report.
 

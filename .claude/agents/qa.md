@@ -43,6 +43,7 @@ Invoke with the Skill tool. Use only these, and only when they fit:
 
 - `verification-before-completion`: before you return any verdict, to make sure every claim rests on a command you ran.
 - `run`: to launch and drive the app when the acceptance criteria need the running app, not only unit tests.
+- `webapp-testing` (vendored from the official Anthropic skills repo, see its README): drive a local web app with Playwright when a criterion needs real browser behavior. It needs the Python Playwright package, which is not installed. If `python3 -c "import playwright"` fails, mark that criterion `not_verified`, say why in the report, and ask Simon to install it. Never install it yourself. Starting servers through its helper needs approval, so expect a prompt.
 - `systematic-debugging`: when a test fails, to find out whether the cause is the change or the test, before you write the `FAIL`.
 - `write-ticket-notes` and `self-check-report` (project skills in this repo): always, before the final report.
 

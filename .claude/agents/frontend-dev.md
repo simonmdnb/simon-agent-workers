@@ -44,6 +44,7 @@ Invoke with the Skill tool. Use only these, and only when they fit:
 - `test-driven-development`: before writing implementation code for a feature or bugfix.
 - `systematic-debugging`: on any bug, failing test, or unexpected behavior, before proposing a fix.
 - `verification-before-completion`: before you return `READY`, to confirm the work with real commands.
+- `receiving-code-review`: when the Lead sends you QA or design findings after a `FAIL`. Check each finding against the code before changing anything, and push back with evidence on a finding that is wrong.
 - `impeccable`: for UI work (`craft`, `polish`). The `audit` pass belongs to the designer.
 - `write-ticket-notes` and `self-check-report` (project skills in this repo): always, before the final report.
 

@@ -18,6 +18,7 @@ These need an explicit Simon approval in the channel for that exact action (`app
 - Database migrations, deploys, anything that touches production or shared environments
 - Creating or deleting Linear projects, or bulk-editing Linear issues
 - Installing or upgrading dependencies (`npm install`, `npm ci`, lockfile changes): explain what is needed and ask Simon to run it
+- Installing, enabling, updating, or copying in a plugin, skill, MCP server, or hook. Third-party skills run with the full permissions of the agent that loads them, so they are vetted first: read `SKILL.md` and every script, look for downloads, obfuscated text, `!` shell-command syntax in skill text, and hooks that install packages or send data elsewhere. Only official or company sources, pinned to a version or commit, with a README that records where it came from. Agents never install these on their own.
 - Deleting branches, worktrees, or files outside your own worktree
 - Force-pushing, history rewriting, `git reset --hard` on shared work
 

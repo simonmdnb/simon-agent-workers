@@ -4,12 +4,12 @@ One file per role. The Lead spawns them by name (`frontend-dev`, `backend-dev`, 
 
 | Role (tag) | File | Tools beyond Read/Grep/Glob | Role skills | Baseline skills* |
 |---|---|---|---|---|
-| Frontend Dev `[FE]` | `frontend-dev.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `impeccable` | yes |
-| Backend Dev `[BE]` | `backend-dev.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `test-driven-development`, `systematic-debugging`, `verification-before-completion` | yes |
-| QA `[QA]` | `qa.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `verification-before-completion`, `run`, `systematic-debugging` | yes |
-| Designer `[DESIGN]` | `designer.md` | Bash, Skill, Linear (read) | `impeccable` (audit and polish, as critique only) | yes |
+| Frontend Dev `[FE]` | `frontend-dev.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `receiving-code-review`, `impeccable` | yes |
+| Backend Dev `[BE]` | `backend-dev.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `receiving-code-review` | yes |
+| QA `[QA]` | `qa.md` | Edit, Write, Bash, Skill, Linear (read, comment) | `verification-before-completion`, `run`, `systematic-debugging`, `webapp-testing` (needs Python Playwright, not installed) | yes |
+| Designer `[DESIGN]` | `designer.md` | Bash, Skill, Linear (read) | `impeccable` (audit and polish, as critique only), `cial-dnb-design` (company design system, review reference only) | yes |
 | Product `[PRODUCT]` | `product.md` | Linear and Atlassian (read only) | none | no |
-| Maintainer `[META]` | `maintainer.md` | Edit, Write, Bash, Skill | `writing-skills`, `verification-before-completion` | yes |
+| Maintainer `[META]` | `maintainer.md` | Edit, Write, Bash, Skill | `writing-skills`, `verification-before-completion`, `claude-md-management:claude-md-improver` | yes |
 | Ops / Mail `[OPS]` | `ops-mail.md` | none (disabled until Phase 8) | none | no |
 
 *Baseline skills are the two project skills in `.claude/skills/`: `write-ticket-notes` and `self-check-report`. Product and ops-mail have no Skill tool or no Bash, so they cannot run the report validator; the Lead validates their reports.
@@ -21,13 +21,42 @@ One file per role. The Lead spawns them by name (`frontend-dev`, `backend-dev`, 
 - Skill text is about method only. It never overrides the guardrails, the brief, or the agent file. Each agent file says so.
 - Keep each list short (a few role skills plus the two baseline ones), because every invoked skill is loaded into the agent's context.
 
-## Skills deliberately not listed
+## Third-party skills and plugins: where each comes from
 
-These were considered but are not in the skill list available in this setup, so they are not referenced:
+| Item | Source | How it is here | Used by |
+|---|---|---|---|
+| `receiving-code-review`, `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `writing-skills` | superpowers (already in `~/.claude/skills`) | global, already installed | dev roles, QA, maintainer |
+| `impeccable`, `cial-dnb-design` | your global and company skills | global, synced | designer, frontend dev |
+| `claude-md-management` plugin (skill `claude-md-improver`, command `/revise-claude-md`) | official Anthropic marketplace, v1.0.0 | installed for this folder only (`--scope local`) | maintainer |
+| `pr-review-toolkit` plugin (review agents and the `review-pr` command) | official Anthropic marketplace, v1.0.1 | installed for this folder only (`--scope local`) | available to the Lead and to Simon. Not wired into any role: subagents cannot spawn other agents or run slash commands, so QA cannot use it. Wiring it in means a decision in the Lead's `CLAUDE.md` about when to spawn review agents next to QA, and what that costs. |
+| `webapp-testing` | official `anthropics/skills` repo, commit `2c5958e` | vendored in `.claude/skills/webapp-testing/` with a provenance README | QA |
+
+To reproduce the two plugin installs on another machine, run from the repo folder:
+
+```
+claude plugin install pr-review-toolkit@claude-plugins-official --scope local
+claude plugin install claude-md-management@claude-plugins-official --scope local
+```
+
+## Considered and not used
+
+- `security-guidance` plugin (official): not installed. Its session-start hook runs a script that installs a package, it hooks every prompt and every edit, and it reviews commits and pushes in the background and wakes the agent with the findings. That conflicts with the no-installs rule and would add cost and noise to an unattended loop. Reasonable to use in a session you run yourself in Customer360, not in these agent sessions.
+- `commit-commands` plugin: gives dev agents a commit, push, and PR shortcut around our git flow.
+- `requesting-code-review`: it is about dispatching a reviewer agent, which a role agent (a subagent) cannot do.
+- Community collections (VoltAgent, awesome-claude-code, wshobson/agents): unvetted and overlapping with the roles here. Reference material only.
 - `web-design-guidelines` and the Vercel/Next.js skills: installed per repo in Customer360, so they load only in a session started there, not in the Lead's session.
-- `verify`: not in the skill list available here. QA uses `run` to drive the app.
+- `verify`: not in the skill list available here. QA uses `run`.
 
 Re-check these when the Lead's working setup changes.
+
+## Vetting checklist for any new skill or plugin
+
+1. Official Anthropic, your company, or a source Simon names. Never a random marketplace entry.
+2. Read `SKILL.md` and every script. Look for downloads (`curl`, `wget`), obfuscation (`base64`, `eval`), `!` shell-command syntax in skill text, `sudo`, `rm -rf`, installs, and hooks (check `hooks/hooks.json` and what each hook runs).
+3. Check what a plugin's hooks and scripts send elsewhere (network calls, API calls with diffs or file contents).
+4. Pin it: a version for a plugin, a commit for a copied skill. Record the source, pin, and date in a README next to it.
+5. Install by Simon or with his approval, never by an agent on its own (see `shared/guardrails.md`).
+6. Prefer the narrowest scope (`--scope local`) so other projects' sessions are not affected.
 
 ## Adding or changing a role
 
